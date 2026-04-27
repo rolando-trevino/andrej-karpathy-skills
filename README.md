@@ -125,6 +125,41 @@ echo "" >> CLAUDE.md
 curl https://raw.githubusercontent.com/forrestchang/andrej-karpathy-skills/main/CLAUDE.md >> CLAUDE.md
 ```
 
+**Option C: GitHub Copilot CLI skill**
+
+This repository also exposes the guidelines in GitHub Copilot CLI's project skill layout:
+
+```text
+.github\skills\karpathy-guidelines\SKILL.md
+```
+
+To make the skill available in a single project, copy the skill directory into that project's `.github\skills` directory:
+
+```powershell
+New-Item -ItemType Directory -Force .github\skills
+Copy-Item -Recurse path\to\andrej-karpathy-skills\.github\skills\karpathy-guidelines .github\skills\
+```
+
+To make the skill available across projects on your machine, copy it into your personal Copilot skills directory:
+
+```powershell
+New-Item -ItemType Directory -Force $HOME\.copilot\skills
+Copy-Item -Recurse path\to\andrej-karpathy-skills\.github\skills\karpathy-guidelines $HOME\.copilot\skills\
+```
+
+Then reload skills in an active Copilot CLI session:
+
+```text
+/skills reload
+/skills info karpathy-guidelines
+```
+
+Invoke it explicitly with:
+
+```text
+Use /karpathy-guidelines to fix this bug with the smallest safe change and verify the result.
+```
+
 ## Using with Cursor
 
 This repository includes a committed Cursor project rule ([`.cursor/rules/karpathy-guidelines.mdc`](.cursor/rules/karpathy-guidelines.mdc)) so the same guidelines apply when you open the project in Cursor. See **[CURSOR.md](CURSOR.md)** for setup, using the rule in other projects, and how this relates to Claude Code.
